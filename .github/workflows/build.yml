@@ -3,7 +3,8 @@ name: 编译OpenWrt固件
 on:
   push:
     paths: .config
-
+  watch:
+    types: [started]
 env:
   CONFIG_FILE: .config
 
