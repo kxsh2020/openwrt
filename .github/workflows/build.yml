@@ -57,7 +57,14 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success'
       with:
-        name: lede_directory
+        name: OpenWrt_Bin
         path: lede/bin
         
+    - name: Upload Firmware to Github Releases
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: OpenWrt Firmware
+        files: lede/bin/Firmware/*
         
