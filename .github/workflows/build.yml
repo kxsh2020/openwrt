@@ -24,20 +24,20 @@ jobs:
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
     - name: Clone source code
-      run: |      
-        git clone -b main --single-branch https://github.com/Lienol/openwrt openwrt  && cd openwrt
-        git clone https://github.com/jerrykuku/luci-theme-argon.git  
+      run: |
+        git clone -b main --single-branch https://github.com/Lienol/openwrt lede  && cd lede
+        git clone https://github.com/jerrykuku/luci-theme-argon.git 
         
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run: cd lede && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: cd lede && ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -e files ] && mv files lede/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede/.config
     - name: Download package
       id: package
       run: |
@@ -57,5 +57,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success'
       with:
-        name: openwrt
+        name: lede_directory
         path: lede/bin
+        
+        
