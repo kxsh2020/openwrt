@@ -60,7 +60,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success'
       with:
-        name: OpenWrt_Bin
+        name: OpenWrt_immortalwrt
         path: lede/bin
         
     - name: Upload Firmware to Github Releases
