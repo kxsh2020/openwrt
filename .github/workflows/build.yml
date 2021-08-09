@@ -62,6 +62,7 @@ jobs:
         
     - name: Upload Firmware to Github Releases
       uses: softprops/action-gh-release@v1
+      if: steps.compile.outputs.status == 'success' &&  !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
