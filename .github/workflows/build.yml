@@ -18,16 +18,18 @@ jobs:
 
     - name: Initialization environment
       run: |
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        docker rmi $(docker images -q)
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc /etc/mysql /etc/php
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
     - name: Clone source code
       run: |
-        git clone https://github.com/coolsnowwolf/lede  && cd lede
-        rm -rf package/lean/luci-theme-argon
-        git clone https://github.com/jerrykuku/luci-theme-argon.git
+        #git clone https://github.com/coolsnowwolf/lede  && cd lede
+        git clone -b openwrt-18.06 --single-branch https://github.com/immortalwrt/immortalwrt lede  && cd lede
+        #rm -rf package/lean/luci-theme-argon
+        #git clone https://github.com/jerrykuku/luci-theme-argon.git
         
     - name: Update feeds
       run: cd lede && ./scripts/feeds update -a
