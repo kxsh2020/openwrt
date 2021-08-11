@@ -28,11 +28,11 @@ jobs:
         sudo timedatectl set-timezone "Asia/Shanghai"
     - name: Clone source code
       run: |
-        git clone https://github.com/coolsnowwolf/lede  && cd lede/package
+        git clone https://github.com/coolsnowwolf/lede && cd lede
         #git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt lede  && cd lede/package
         #rm -rf package/lean/luci-theme-argon
         #git clone https://github.com/jerrykuku/luci-theme-argon.git
-        git clone https://github.com/liuran001/openwrt-packages
+        #git clone https://github.com/liuran001/openwrt-packages
         
     - name: Update feeds
       run: cd lede && ./scripts/feeds update -a
